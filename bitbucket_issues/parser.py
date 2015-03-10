@@ -29,6 +29,8 @@ class IssuesList(BaseElement):
 
 class IssueItem(BaseElement):
     BUG = 'bug'
+    MAJOR = 'major'
+    CLOSED = 'closed'
 
     @property
     def id(self):
@@ -43,3 +45,17 @@ class IssueItem(BaseElement):
     def type(self):
         el = self.tree.cssselect('a[title^="Filter by type: "]')[0]
         return el.text.strip()
+
+    @property
+    def priority(self):
+        el = self.tree.cssselect('a[title^="Filter by priority: "]')[0]
+        return el.text.strip()
+
+    @property
+    def state(self):
+        return self.tree.attrib.get('data-state')
+
+    @property
+    def votes(self):
+        votes = self.tree.cssselect('.votes')[0].text_content().strip()
+        return int(votes) if votes else 0

@@ -44,3 +44,19 @@ def test_get_issue_id(issues_content):
 def test_get_issue_type(issues_content):
     issues = IssuesList(issues_content)
     assert IssueItem.BUG == issues[0].type
+
+
+def test_get_issue_priority(issues_content):
+    issues = IssuesList(issues_content)
+    assert IssueItem.MAJOR == issues[0].priority
+
+
+def test_get_issue_state(issues_content):
+    issues = IssuesList(issues_content)
+    assert IssueItem.CLOSED == issues[0].state
+
+
+def test_get_issue_votes(issues_content):
+    issues = IssuesList(issues_content)
+    assert 0 == issues[0].votes
+    assert 1 == issues[1].votes
